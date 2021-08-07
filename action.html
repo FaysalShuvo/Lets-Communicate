@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="public/Assets/css/style.css" />
   </head>
-  <body>
+  <body class="pt-5">
     <nav class="navbar navbar-expand-md fixed-top">
       <a href="#" class="navbar-brand text-dark logo">Let's Talk</a>
 
@@ -63,19 +63,55 @@
     <main>
       <div class="jumbotron h-100 d-flex">
         <div class="container w-50">
-          <h1 style="font-size: 4rem" class="text-info font-weight-bold">
+          <h2 style="font-size: 3rem" class="text-info">
             Feel Free To Communicate With Anyone!
-          </h1>
+          </h2>
           <p style="font-size: 15px">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
             officiis labore nostrum deserunt esse dicta mollitia, suscipit
             recusandae sit asperiores officia aspernatur fugiat, rem placeat.
-            Numquam dolorem neque nesciunt, incidunt officiis temporibus
-            voluptatem. Numquam culpa atque beatae dolorum voluptas a debitis
-            magni, sint enim maiores exercitationem fugit reiciendis quas
-            laudantium architecto, cum rerum. Eius excepturi alias ducimus
-            facilis autem, saepe accusamus incidunt.
+            voluptatem. Numquam culpa atque beatae dolorum
           </p>
+          <ul class="d-flex justify-content-start align-items-center">
+            <li>
+              <button
+                class="
+                  btn-info btn btn-md
+                  text-light
+                  font-weight-bold
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  mr-2
+                "
+              >
+                <span class="material-icons mr-2">video_call</span>
+                New Meeting
+              </button>
+            </li>
+            <li>
+              <div
+                style="background-color: #fff"
+                class="
+                  btn-outline-secondary btn-info btn btn-md
+                  text-dark
+                  font-weight-bold
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  
+                "
+              >
+                <span class="material-icons mr-2">keyboard</span>
+                <input
+                  style="border: none"
+                  type="text"
+                  placeholder="Enter A Code..."
+                />
+              </div>
+            </li>
+            <li class="text-dark pl-2 font-weight-bold cursor-pointer">Join</li>
+          </ul>
         </div>
         <div
           class="
@@ -87,12 +123,15 @@
           "
         >
           <img
-            style="width: 500px"
+            class="signin-image"
             src="./public/Assets/images/undraw_Remote_meeting.svg"
             alt=""
           />
         </div>
       </div>
     </main>
+    <footer class="container">
+      <h6>Learn More!</h6>
+    </footer>
   </body>
 </html>

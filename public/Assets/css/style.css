@@ -1,0 +1,23 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif !important;
+  font-size: large;
+}
+.navbar-brand {
+  font-size: 25px;
+}
+
+.nav-item a {
+  font-family: "Poppins", sans-serif !important;
+  color: gray !important;
+  font-size: 16px;
+  padding: 0 10px;
+  font-weight: 500;
+}
+
+.display-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

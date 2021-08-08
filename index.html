@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./public/Assets/js/app.js"></script>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -14,7 +15,7 @@
     <title>Let's Communicate</title>
   </head>
   <body>
-    <main class="container-fluid d-flex flex-column home-wrap">
+    <main class="d-flex flex-column home-wrap">
       <div class="g-top text-light">
         <div class="top-remote-video-show-wrap d-flex">
           <div id="meetingContainer" class="w-75 d-none">
@@ -67,7 +68,7 @@
             <div class="top-left-participant-icon">
               <span class="material-icons">people</span>
             </div>
-            <div class="top-left-participant-count"></div>
+            <div class="top-left-participant-count">0</div>
           </div>
           <div class="top-left-chat-wrap pt-2 cursor-pointer">
             <span class="material-icons"> message </span>
@@ -91,7 +92,7 @@
             <span class="material-icons"> keyboard_arrow_down </span>
           </div>
         </div>
-        <div class="bottom-middle">
+        <div class="bottom-middle display-center" style="height: 10vh">
           <div
             class="
               mic-toggle-wrap
@@ -147,8 +148,9 @@
             "
           >
             <span class="material-icons">present_to_all</span>
+            <div>Present Now</div>
           </div>
-          <div>Present Now</div>
+
           <div
             class="option-wrap cursor-pointer display-center"
             style="height: 10vh; position: relative"
@@ -160,5 +162,18 @@
         </div>
       </div>
     </main>
+    <script>
+      const urlParam = new URLSearchParams(window.location.search);
+      const meeting_id = urlParam.get("meetingID");
+      const user_id = window.prompt("Enter Your userId");
+
+      if (!user_id || !meeting_id) {
+        alert("User id or meeting id missing");
+        window.location.href = "/action.html";
+      }
+      $("#meetingContainer").show();
+
+      myApp._init(user_id, meeting_id);
+    </script>
   </body>
 </html>

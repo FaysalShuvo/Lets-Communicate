@@ -137,7 +137,7 @@
           "
         >
           <img
-            class="signin-image"
+            class="signing-image"
             src="./public/Assets/images/undraw_Remote_meeting.svg"
             alt=""
           />
@@ -148,22 +148,19 @@
       <h6>Learn More!</h6>
     </footer>
     <script>
-      $(() => {
-        $(".join-meeting").click(() => {
-          $(".enter-code").focus();
-        });
-        $(".join-action").click(() => {
-          const join_value = $(".enter-code").val();
-          const meetingURL =
-            window.location.origin + "?meetingID=" + join_value;
-          window.location.replace(meetingURL);
-        });
-        $(".new-meeting").click(() => {
-          const eight_digit_value = Math.floor(Math.random() * 100000000);
-          const meetingURL =
-            window.location.origin + "?meetingID=" + eight_digit_value;
-          window.location.replace(meetingURL);
-        });
+      $(".join-meeting").click(() => {
+        $(".enter-code").focus();
+      });
+      $(".join-action").click(() => {
+        const join_value = $(".enter-code").val();
+        const meetingURL = window.location.origin + "?meetingID=" + join_value;
+        window.location.replace(meetingURL);
+      });
+      $(".new-meeting").click(() => {
+        const eight_digit_value = Math.floor(Math.random() * 100000000);
+        const meetingURL =
+          window.location.origin + "?meetingID=" + eight_digit_value;
+        window.location.replace(meetingURL);
       });
     </script>
   </body>

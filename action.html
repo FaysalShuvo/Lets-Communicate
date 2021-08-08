@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Or Join With Someone</title>
     <link rel="stylesheet" href="public/Assets/css/bootstrap.min.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -12,10 +11,12 @@
     />
 
     <link rel="stylesheet" href="public/Assets/css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Create Or Join With Someone</title>
   </head>
   <body class="pt-5">
     <nav class="navbar navbar-expand-md fixed-top">
-      <a href="#" class="navbar-brand text-dark logo">Let's Talk</a>
+      <a href="#" class="navbar-brand text-dark logo">Let's Communicate</a>
 
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
@@ -47,13 +48,21 @@
                 btn btn-outline-secondary btn-lg
                 text-info
                 font-weight-bold
+                join-meeting
               "
             >
               Join Meeting
             </div>
           </li>
           <li class="nav-item">
-            <div class="btn btn-lg btn-info text-light font-weight-bold">
+            <div
+              class="
+                btn btn-lg btn-info
+                text-light
+                font-weight-bold
+                new-meeting
+              "
+            >
               Start Meeting
             </div>
           </li>
@@ -76,6 +85,7 @@
             <li>
               <button
                 class="
+                  new-meeting
                   btn-info btn btn-md
                   text-light
                   font-weight-bold
@@ -99,18 +109,22 @@
                   d-flex
                   justify-content-center
                   align-items-center
-                  
                 "
               >
                 <span class="material-icons mr-2">keyboard</span>
                 <input
+                  class="enter-code"
                   style="border: none"
                   type="text"
-                  placeholder="Enter A Code..."
+                  placeholder="Enter Code..."
                 />
               </div>
             </li>
-            <li class="text-dark pl-2 font-weight-bold cursor-pointer">Join</li>
+            <li
+              class="text-dark pl-2 font-weight-bold cursor-pointer join-action"
+            >
+              Join
+            </li>
           </ul>
         </div>
         <div
@@ -133,5 +147,24 @@
     <footer class="container">
       <h6>Learn More!</h6>
     </footer>
+    <script>
+      $(() => {
+        $(".join-meeting").click(() => {
+          $(".enter-code").focus();
+        });
+        $(".join-action").click(() => {
+          const join_value = $(".enter-code").val();
+          const meetingURL =
+            window.location.origin + "?meetingID=" + join_value;
+          window.location.replace(meetingURL);
+        });
+        $(".new-meeting").click(() => {
+          const eight_digit_value = Math.floor(Math.random() * 100000000);
+          const meetingURL =
+            window.location.origin + "?meetingID=" + eight_digit_value;
+          window.location.replace(meetingURL);
+        });
+      });
+    </script>
   </body>
 </html>

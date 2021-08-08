@@ -11,10 +11,16 @@
 // };
 
 const myApp = (function () {
+  let socket = null;
   function init(uid, mid) {
-    alert("From App Js");
+    event_process_signaling_server();
   }
-
+  const event_process_signaling_server = () => {
+    socket = io.connect();
+    socket.on("connect", () => {
+      alert("From Connected");
+    });
+  };
   return {
     _init: function (uid, mid) {
       init(uid, mid);

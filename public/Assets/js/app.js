@@ -1,6 +1,8 @@
-const appProcces = function () {
+const appProcces = (function () {
   let peers_connection_ids = [];
   let peers_connection = [];
+  let remote_vid_stream = [];
+  let remote_audio_stream = [];
   let serverProcess;
   function _init(SDP_function, my_connid) {
     serverProcess = SDP_function;
@@ -31,10 +33,40 @@ const appProcces = function () {
         );
       }
     };
-    connection.ontrack = function (event) {};
+    connection.ontrack = function (event) {
+      if (!remote_vid_stream[connid]) {
+        remote_vid_stream[connid] = new MediaStream();
+      }
+      if (!remote_audio_stream[connid]) {
+        remote_audio_stream[connid] = new MediaStream();
+      }
+      if (event.track.kind == "video") {
+        remote_vid_stream[connid].getVideoTracks().forEach((t) => {
+          remote_vid_stream[connid].removeTrack(t);
+          remote_vid_stream[connid].addTrack(event.track);
+
+          let remoteVideoPlayer = document.getElementById("v_" + connid);
+          remoteVideoPlayer.srcObject = null;
+          remoteVideoPlayer.srcObject = remote_vid_stream[connid];
+          remoteVideoPlayer.load();
+        });
+      } else if (event.track.kind == "audio") {
+        remote_audio_stream[connid].getAudioTracks().forEach((t) => {
+          remote_audio_stream[connid].removeTrack(t);
+          remote_vid_stream[connid].addTrack(event.track);
+
+          let remoteAudioPlayer = document.getElementById("a_" + connid);
+          remoteAudioPlayer.srcObject = null;
+          remoteAudioPlayer.srcObject = remote_audio_stream[connid];
+          remoteAudioPlayer.load();
+        });
+      }
+    };
 
     peers_connection_ids[connid] = connid;
     peers_connection[connid] = connection;
+
+    return connection;
   }
   function setOffer(connid) {
     let connection = peers_connection[connid];
@@ -55,8 +87,11 @@ const appProcces = function () {
     init: async function (SDP_function, my_connid) {
       await _init(SDP_function, my_connid);
     },
+    processClientFunc: async function (SDP_function, my_connid) {
+      await SDPProcess(data, from_connid);
+    },
   };
-};
+})();
 const myApp = (function () {
   let socket = null;
   let user_id = "";
@@ -91,6 +126,9 @@ const myApp = (function () {
     socket.on("inform_others_about_me", (data) => {
       addUser(data.other_user_id, data.connId);
       appProcces.setNewConnection(data.connId);
+    });
+    socket.on("SDPProcess", async function (data) {
+      await appProcess.processClientFunc(data.message, data.from_connid);
     });
   };
 

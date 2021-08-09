@@ -8,7 +8,25 @@ const server = app.listen(3000, () => {
 
 const io = require("socket.io")(server);
 app.use(express.static(path.join(__dirname, "")));
-
+let userConnections = [];
+let other_users = userConnections.filter((p) => {
+  p.meeting_id == data.meetingId;
+});
 io.on("connection", (socket) => {
-  console.log("SOCKET id is:", socket.id);
+  socket.on("userconnect", (data) => {
+    console.log("user connected:", data.displayName, data.meeting_id);
+
+    userConnections.push({
+      connectionId: socket.displayName,
+      user_id: data.displayName,
+      meeting_id: data.meetingId,
+    });
+
+    other_users.forEach((v) => {
+      socket.to(v.connectionId).emit("inform_others_about_me", {
+        other_users_id: data.displayName,
+        connId: socket.id,
+      });
+    });
+  });
 });
